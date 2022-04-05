@@ -126,15 +126,10 @@ cyclicity:-
 time related data points shows more information about seasonality and its pattern. it can be explained by other cyclical
 movements in data.
 
-irreglarirt:-
+irreglarity:-
 =============
 time related data points shows random behavior of any varible which can not be explained by cyclical movements.
 in other terms this term gives non seasonal patterns in data.
-
-
-
-
-
 
 stationarity:-
 ==============
