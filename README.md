@@ -1,4 +1,3 @@
-# time_series_analysis
 time series---
 ==============
 in common a time series is a sequence of values/numbers that are collected at successive 
@@ -97,6 +96,92 @@ data point and also in a way we are propagating the recent past observation and 
 next data. And that is why time series prediction interval range can be way off then expected to be. 
 
 
+components of time series:-
+===========================
+time series analysis paves us the way to predict future using past. Prediction will be made using hidden
+pattern and data behaviors. analyzing time series data will show trends in data to define underline patterns
+or processes around.
+
+
+major components include,
+1- trend 
+2- seasonality
+3- cyclicity
+4- irregularity or error
+
+trend:-
+========
+time related data points tends to increase or decrease over time and over a long period this clearly
+depicts the story or movement of data. not always trend will increase or decrease, also with change
+in time trend can be stable as well. 
+
+seasonality:-
+=============
+time related data points shows variation some variable in association with some predetermined behavior or
+patterns. more often then not seasonality will be captured regularly in a specific time window space one after
+another.
+
+cyclicity:-
+===========
+time related data points shows more information about seasonality and its pattern. it can be explained by other cyclical
+movements in data.
+
+irreglarirt:-
+=============
+time related data points shows random behavior of any varible which can not be explained by cyclical movements.
+in other terms this term gives non seasonal patterns in data.
+
+
+
+
+
+
+stationarity:-
+==============
+
+a time series is a stationary time series if mean and variance between two consecutive
+time interval remains constant. And there exists no seasonality in time series.
+
+checking for stationarity:-
+===========================
+1- visual eyeballing
+2- mathematical intuition (local tests)
+3- hypotheis test of sinificance (adf test)
+
+how to make a time series stationary:-
+=====================================
+suppose a time series is modelled by,
+Yt = A0 + A1 * Yt-1 + Error...
+Zt = Yt - Yt-1(as per definition)
+
+fitting equation of time series,
+Zt = A0 + A1 * Yt-1 + Error(t) - A0 - A1 * Yt-2 - Error(t-1)
+Zt = A1 + Error(t-1) - Error(t-2)
+
+So, mean of Zt would be a constant term and variance as well.
+
+
+Now we can use Zt time series to build models and generate predictions. One thing to notice here 
+is that Zt time series would contain one observation less than Yt,because we are taking two consecutive
+observations to make it stationary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 auto regression---
 ==================
 assumpions:-
@@ -128,7 +213,26 @@ lagged values. It represents that how well present values of time series is rela
 We will use this to get number of lagged values to be used in modelling.
 
 
+let us take one scenario. we want to predict average monthly sales of fish.
 
+deriving from time series, we know that measuremnt at time T would be dependent upon time T-1 and T-2.
+We have taken 2nd order of time lag for the sake of simplicity , but choice is yours like T-3...., take 
+how far you want to go with effect of time.
+
+in order to determine sales of fish many factors come into play. For instance sales can be depedent upon
+fishing regulation , other festivities around at that time and other local preferences. Among all these factors
+the most intuitive thing that derives fish sales is last month sales price. Possibly a very good determiner.
+
+Sales(T-2) can be related to Sales(T-1)-- direct
+Sales(T-1) can be related to Sales(T)-- direct
+Sales(T-2) can be related to sales(T)-- indirect, due to some eventuality
+
+In this case, what ACF will do is to calculate auto correlation between Sales(T-2) and Sales(T).
+It turns out that we are trying to find correlation between current month values with T-2 lagged
+values. --Pearson correlation--
+
+To be very precise, the transition from Sales(T-2) to Sales(T) would be comprised of direct and indirect
+effects. Both of these effects would constitute basis of ACF function resulting in more lagged values.
 
 
 PACF(partial auto correlation function):-
@@ -141,5 +245,17 @@ The reason being removing known variations before we found unknown hidden inform
 any, could be very well captured in next lag so that we attain good correlation to keep
 that feature useful in order to avoid multi-collinearily.
 
+Sales(T-2) can be related to sales(T)-- indirect, due to some eventuality
 
-<Short introduction to time series>
+In this case, what PACF will do is to calculate auto correlation between Sales(T-2) and Sales(T-1).
+It turns out that we are trying to find correlation between two lagged version of time series. This
+will be helping us to find all possible lags and its dependencies after removing direct effects resulting
+in less number of lagged values to avoid multicollnearity.
+
+
+
+
+
+ 
+
+
