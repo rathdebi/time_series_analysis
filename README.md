@@ -126,10 +126,15 @@ cyclicity:-
 time related data points shows more information about seasonality and its pattern. it can be explained by other cyclical
 movements in data.
 
-irreglarity:-
+irreglarirt:-
 =============
 time related data points shows random behavior of any varible which can not be explained by cyclical movements.
 in other terms this term gives non seasonal patterns in data.
+
+
+
+
+
 
 stationarity:-
 ==============
@@ -159,6 +164,73 @@ So, mean of Zt would be a constant term and variance as well.
 Now we can use Zt time series to build models and generate predictions. One thing to notice here 
 is that Zt time series would contain one observation less than Yt,because we are taking two consecutive
 observations to make it stationary.
+
+
+augmented dickey fuller test:-
+============================= 
+
+well, initially we have looked at time series and derived local tests under certain 
+time intervals to justify time series properties. on the whole these tests does not provide substantial
+background of time series property. We as data practioners need to always proof something based upon statistical
+tests and its significance. the answer to this is ADF test, a.k.a augmented dickey fuller test.
+
+in this test we will try to build a robust process around time series to make more formal tests
+on time series properties that are in question of stationarity?
+
+performing dickey fuler test assumes that the given time series is a non stationary one.
+Functionally the time series is a linear function of its one lag period in the past , 
+a.k.a AR1 process.
+
+Yt = Mean + Theta1 * Yt-1 + Error
+
+The null hypothesis of dickey fuller test states that the given time series is a non-stationary one.
+In contrast the alternate hypothesis states that the given time series is a stationary one.
+
+the hypothesis test calculates p-value assuming that null to be true what is the probability
+of getting an alternate hypothesis to be true more towards it. if p-value < 0.05 then null go,
+else if p-value > 0.05 then null fly.
+
+H0 (null hypothesis) => Theta1 = 1 (having unit root,non-stationary)
+HA (alternate hypothesis) => Theta1 < 1 ( no unit root,stationary)
+
+
+let us subtract Yt-1 from both sides of equation,
+Yt-Yt-1 = Mean + (Theta1-1) * Yt-1 + Error
+DeltaYt = Mean + Gamma * Yt-1 + Error
+
+H0 (null hypothesis) => Gamma = 0 (non-stationary)
+HA (alternate hypothesis) => Gamma < 0 (stationary)
+
+we will use a dickey fuller distribution in this case to calculate p value.
+ideally it should be t distribution in case of any regression prblem, but over here
+Yt-1 is having a unit root which is why we go for a dickey fuller distribution.
+
+formula for dickey fuller distribution- 
+T-stats = gamma hat / std error(gamma hat)
+
+now the question comes so naturally is that what if if we have time series that is a linear function
+of previous all lagged values like AR 2,3,4 processes. That is where Augmented Dickey Fuller test comes
+into the rescue. Just that we will extend the equation in turn making it more complicated.
+
+composing this new version of augmented dickey fullrer test,
+DeltaYt = Mean + Gamma * Yt-1  + SumOver(i=1 to P) Beta1 * Delta * Yt-1 + Error 
+where Beta1 belongs to that dickey fuller distribution.
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -246,11 +318,3 @@ In this case, what PACF will do is to calculate auto correlation between Sales(T
 It turns out that we are trying to find correlation between two lagged version of time series. This
 will be helping us to find all possible lags and its dependencies after removing direct effects resulting
 in less number of lagged values to avoid multicollnearity.
-
-
-
-
-
- 
-
-
